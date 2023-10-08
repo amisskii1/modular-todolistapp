@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.misskii.javatodolistapp.EditPageController">
+   <children>
+      <TextField fx:id="taskID" layoutX="213.0" layoutY="90.0" promptText="Enter Task Id" />
+      <TextField fx:id="taskTitle" layoutX="211.0" layoutY="143.0" promptText="change title" />
+      <TextField fx:id="taskDesk" layoutX="213.0" layoutY="188.0" promptText="change description" />
+      <CheckBox fx:id="markDone" layoutX="237.0" layoutY="275.0" mnemonicParsing="false" text="Mark as done" />
+      <Button layoutX="255.0" layoutY="309.0" mnemonicParsing="false" onAction="#confChangeTask" text="Confirm" />
+      <Label layoutX="193.0" layoutY="94.0" text="ID:" />
+      <Label layoutX="183.0" layoutY="147.0" text="Title:" />
+      <Label layoutX="145.0" layoutY="192.0" text="Description:" />
+      <TextField fx:id="taskExp" layoutX="210.0" layoutY="232.0" promptText="change expiration date" />
+      <Label layoutX="164.0" layoutY="236.0" text="DueTo:" />
+   </children>
+</AnchorPane>
