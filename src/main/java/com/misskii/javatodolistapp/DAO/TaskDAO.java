@@ -6,6 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskDAO {
     private final Connection connection = DBUtil.getConnection();
@@ -29,16 +31,18 @@ public class TaskDAO {
         }
     }
 
-    public void updateTaskByID(String id, String description, String title, String dueto, String status){
+    public void updateTaskByID(int personId,String id, String description, String title, String dueto, String status){
         try {
             int taskId = Integer.parseInt(id);
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("UPDATE TASK SET taskdescription=?, tasktitle=?, dueto=?, status=? WHERE taskid=?");
+                    connection.prepareStatement("UPDATE TASK SET taskdescription=?, tasktitle=?, dueto=?, status=? WHERE TASK.taskid=?" +
+                            "AND TASK.personid=?");
             preparedStatement.setString(1, description);
             preparedStatement.setString(2, title);
             preparedStatement.setString(3, dueto);
             preparedStatement.setString(4, status);
             preparedStatement.setInt(5, taskId);
+            preparedStatement.setInt(6, personId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
