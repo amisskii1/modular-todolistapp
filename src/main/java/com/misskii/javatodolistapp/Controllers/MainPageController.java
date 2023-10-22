@@ -1,4 +1,4 @@
-package com.misskii.javatodolistapp;
+package com.misskii.javatodolistapp.Controllers;
 
 import com.misskii.javatodolistapp.DAO.TaskDAO;
 import com.misskii.javatodolistapp.Models.Task;
@@ -12,10 +12,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
-public class MainPageController {
+public class MainPageController extends GeneralController {
     private Parent root;
     private Scene scene;
     private Stage stage;
@@ -50,24 +49,14 @@ public class MainPageController {
     }
 
     public void switchToCreate(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-page.fxml"));
-        root = loader.load();
-        AddPageController addPageController = loader.getController();
-        addPageController.getUserId(this.userId);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchFromMainPage(event, "add-page.fxml", this.userId);
     }
 
     public void switchToEdit(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("edit-page.fxml"));
-        root = loader.load();
-        EditPageController editPageController = loader.getController();
-        editPageController.getUserId(this.userId);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchFromMainPage(event, "edit-page.fxml", this.userId);
+    }
+
+    public void aboutStage(ActionEvent event) throws IOException {
+        openStage("about.fxml");
     }
 }
