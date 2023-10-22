@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="394.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.misskii.javatodolistapp.MainPageController">
+<AnchorPane prefHeight="394.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.misskii.javatodolistapp.Controllers.MainPageController">
    <children>
       <Button layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#switchToCreate" prefHeight="26.0" prefWidth="88.0" text="Add" />
       <Button layoutX="14.0" layoutY="78.0" mnemonicParsing="false" onAction="#switchToEdit" prefHeight="26.0" prefWidth="88.0" text="Edit" />
@@ -18,6 +18,6 @@
             <TableColumn fx:id="tableStatus" prefWidth="63.99993896484375" text="Status" />
         </columns>
       </TableView>
-      <Button layoutX="15.0" layoutY="359.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="About" />
+      <Button layoutX="15.0" layoutY="359.0" mnemonicParsing="false" onAction="#aboutStage" prefHeight="26.0" prefWidth="88.0" text="About" />
    </children>
 </AnchorPane>

@@ -5,10 +5,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.misskii.javatodolistapp.AddPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.misskii.javatodolistapp.Controllers.AddPageController">
    <children>
       <Button layoutX="167.0" layoutY="272.0" mnemonicParsing="false" onAction="#createNewTask" prefHeight="26.0" prefWidth="83.0" text="Submit" />
-      <Button layoutX="351.0" layoutY="272.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Cancel" />
+      <Button layoutX="351.0" layoutY="272.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="83.0" text="Cancel" />
       <TextField fx:id="taskTitle" layoutX="225.0" layoutY="131.0" />
       <TextField fx:id="taskDescription" layoutX="225.0" layoutY="174.0" />
       <Label layoutX="154.0" layoutY="135.0" text="Task title:" />
