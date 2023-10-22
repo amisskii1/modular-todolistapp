@@ -24,6 +24,7 @@ public class Updater {
             File file = new File(scriptPath);
             try {
                 processBuilder = new ProcessBuilder("cmd.exe", "/c", file.getAbsolutePath());
+                processBuilder.redirectOutput(new File(outputFilePath));
                 process = processBuilder.start();
                 process.waitFor();
             }catch (IOException | InterruptedException e) {
@@ -36,7 +37,7 @@ public class Updater {
         getListOfPackageVersions();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            File versionsFile = new File("versions.json");
+            File versionsFile = new File(outputFilePath);
             if (versionsFile.exists()){
                 JsonNode allVersions = objectMapper.readTree(versionsFile);
                 JsonNode lastVersion = allVersions.get(0);
