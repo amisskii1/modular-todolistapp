@@ -18,14 +18,14 @@ public class AboutController extends GeneralController{
         author.setEditable(false);
         actualVersion.setEditable(false);
         latestVersion.setEditable(false);
-        if (!updater.compareActualVersionWithPackageLatestVersion()){
+        if (!updater.compareVersions()){
             latestVersion.setStyle("-fx-text-fill: red;");
             actualVersion.setStyle("-fx-text-fill: green;");
         }else {
             latestVersion.setStyle("-fx-text-fill: green;");
             actualVersion.setStyle("-fx-text-fill: green;");
         }
-        latestVersion.setText(updater.extractLatestVersionFromJsonFile());
-        actualVersion.setText(updater.getAppVersion());
+        latestVersion.setText(updater.getLatestVersion());
+        actualVersion.setText(updater.getActualVersion());
     }
 }

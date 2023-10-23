@@ -4,6 +4,8 @@ module com.misskii.javatodolistapp {
     requires java.sql;
     requires org.postgresql.jdbc;
     requires com.fasterxml.jackson.databind;
+    requires org.apache.httpcomponents.httpclient;
+    requires org.apache.httpcomponents.httpcore;
 
 
     opens com.misskii.javatodolistapp to javafx.fxml;

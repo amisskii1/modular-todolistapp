@@ -5,78 +5,50 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 public class Updater {
-    private boolean isWindows;
-    private String scriptPath = "src/main/resources/scripts/listPackageVersionsScript.cmd";
-    private String outputFilePath = "versions.json";
-    private String actualVersion = "application-version";
+    private static String ACTUAL_VERSION = "1.0.0";
+    private String latestVersion;
+   public boolean compareVersions(){
+       try {
+           String apiUrl = "https://api.github.com/users/AntonMisskii/packages/maven/com.misskii.javatodolistapp/versions";
+           HttpClient httpClient = HttpClients.createDefault();
+           HttpGet httpGet = new HttpGet(apiUrl);
+           httpGet.addHeader("Accept", "application/vnd.github+json");
+           httpGet.addHeader("Authorization", "Bearer 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");
+           httpGet.addHeader("X-GitHub-Api-Version", "2022-11-28");
+           HttpResponse response = httpClient.execute(httpGet);
 
-    private String appVersion;
-    private ProcessBuilder processBuilder;
-    private Process process;
+           String responseBody = EntityUtils.toString(response.getEntity());
+           ObjectMapper objectMapper = new ObjectMapper();
+           JsonNode jsonNode = objectMapper.readTree(responseBody);
+           String latestVersion = jsonNode.get(0).get("name").asText();
 
-    public boolean defineOperationSystem(){
-        isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-        return isWindows;
+           setLatestVersion(latestVersion);
+
+           if (ACTUAL_VERSION.equals(latestVersion)) {
+               return true;
+           }
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       return false;
+   }
+
+    public String getActualVersion() {
+        return ACTUAL_VERSION;
     }
 
-    public void getListOfPackageVersions() {
-        if (defineOperationSystem()){
-            File file = new File(scriptPath);
-            try {
-                processBuilder = new ProcessBuilder("cmd.exe", "/c", file.getAbsolutePath());
-                process = processBuilder.start();
-                process.waitFor();
-            }catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public String getLatestVersion() {
+        return latestVersion;
     }
 
-    public String extractLatestVersionFromJsonFile() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            File versionsFile = new File(outputFilePath);
-            getListOfPackageVersions();
-            if (versionsFile.exists()){
-                JsonNode allVersions = objectMapper.readTree(versionsFile);
-                JsonNode lastVersion = allVersions.get(0);
-                String version = lastVersion.get("name").asText();
-                return version;
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    public void extractActualVersionFromFile() {
-        try {
-            FileReader fileReader = new FileReader(actualVersion);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String actualVersion;
-            actualVersion = bufferedReader.readLine();
-            appVersion = actualVersion;
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public boolean compareActualVersionWithPackageLatestVersion(){
-        String latestVersion = extractLatestVersionFromJsonFile();
-        if (Objects.equals(latestVersion, appVersion)){
-            return true;
-        }
-        return false;
-    }
-
-    public String getAppVersion() {
-        return appVersion;
-    }
-
-    public void setAppVersion(String appVersion) {
-        this.appVersion = appVersion;
+    public void setLatestVersion(String latestVersion) {
+        this.latestVersion = latestVersion;
     }
 }

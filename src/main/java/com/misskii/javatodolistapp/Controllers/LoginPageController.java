@@ -37,7 +37,7 @@ public class LoginPageController extends GeneralController {
 
     public void initialize(){
         Updater updater = new Updater();
-        if ( !updater.compareActualVersionWithPackageLatestVersion() ){
+        if ( !updater.compareVersions() ){
             version.setStyle("-fx-text-fill: red;");
             version.setText("It appears you might not be using the most up-to-date version." +
                     " \nYou can download the latest version from the following link:" +
