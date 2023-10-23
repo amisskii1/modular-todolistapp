@@ -26,6 +26,6 @@ public class AboutController extends GeneralController{
             actualVersion.setStyle("-fx-text-fill: green;");
         }
         latestVersion.setText(updater.extractLatestVersionFromJsonFile());
-        actualVersion.setText(updater.extractActualVersionFromFile());
+        actualVersion.setText(updater.getAppVersion());
     }
 }

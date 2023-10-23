@@ -9,8 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Updater {
     private boolean isWindows;
     private String scriptPath = "src/main/resources/scripts/listPackageVersionsScript.cmd";
-    private String outputFilePath = "src/main/resources/versions.json";
-    private String actualVersion = "src/main/resources/application-version";
+    private String outputFilePath = "versions.json";
+    private String actualVersion = "application-version";
+
+    private String appVersion;
     private ProcessBuilder processBuilder;
     private Process process;
 
@@ -24,7 +26,6 @@ public class Updater {
             File file = new File(scriptPath);
             try {
                 processBuilder = new ProcessBuilder("cmd.exe", "/c", file.getAbsolutePath());
-                processBuilder.redirectOutput(new File(outputFilePath));
                 process = processBuilder.start();
                 process.waitFor();
             }catch (IOException | InterruptedException e) {
@@ -34,10 +35,10 @@ public class Updater {
     }
 
     public String extractLatestVersionFromJsonFile() {
-        getListOfPackageVersions();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             File versionsFile = new File(outputFilePath);
+            getListOfPackageVersions();
             if (versionsFile.exists()){
                 JsonNode allVersions = objectMapper.readTree(versionsFile);
                 JsonNode lastVersion = allVersions.get(0);
@@ -50,13 +51,13 @@ public class Updater {
         return null;
     }
 
-    public String extractActualVersionFromFile() {
+    public void extractActualVersionFromFile() {
         try {
             FileReader fileReader = new FileReader(actualVersion);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String actualVersion;
             actualVersion = bufferedReader.readLine();
-            return actualVersion;
+            appVersion = actualVersion;
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -65,10 +66,17 @@ public class Updater {
 
     public boolean compareActualVersionWithPackageLatestVersion(){
         String latestVersion = extractLatestVersionFromJsonFile();
-        String actualVersion = extractActualVersionFromFile();
-        if (Objects.equals(latestVersion, actualVersion)){
+        if (Objects.equals(latestVersion, appVersion)){
             return true;
         }
         return false;
+    }
+
+    public String getAppVersion() {
+        return appVersion;
+    }
+
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
     }
 }
