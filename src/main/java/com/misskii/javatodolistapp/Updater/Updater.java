@@ -12,15 +12,17 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 public class Updater {
-    private static String ACTUAL_VERSION = "1.0.0";
+    private static String ACTUAL_VERSION = "1.0.1";
+    private String gitToken = System.getenv("packages_token");
     private String latestVersion;
    public boolean compareVersions(){
        try {
+           System.out.println(gitToken);
            String apiUrl = "https://api.github.com/users/AntonMisskii/packages/maven/com.misskii.javatodolistapp/versions";
            HttpClient httpClient = HttpClients.createDefault();
            HttpGet httpGet = new HttpGet(apiUrl);
            httpGet.addHeader("Accept", "application/vnd.github+json");
-           httpGet.addHeader("Authorization", "Bearer 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");
+           httpGet.addHeader("Authorization", "Bearer "+ gitToken);
            httpGet.addHeader("X-GitHub-Api-Version", "2022-11-28");
            HttpResponse response = httpClient.execute(httpGet);
 
