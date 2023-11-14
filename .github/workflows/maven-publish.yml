@@ -26,6 +26,14 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: ls
       run: ls
+    - name: ls D:\a\todolistApp\todolistApp
+    - name: ls D:\a\todolistApp
+    - name: get content of setings.xml file
+        run: Get-Content D:\a\todolistApp\todolistApp\settings.xml
+    - name: get content of pom.xml file 
+        run: Get-Content D:\a\todolistApp\todolistApp\pom.xml
+      
+
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
