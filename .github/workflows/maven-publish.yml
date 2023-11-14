@@ -29,9 +29,9 @@ jobs:
     - name: ls D:\a\todolistApp\todolistApp
     - name: ls D:\a\todolistApp
     - name: get content of setings.xml file
-        run: Get-Content D:\a\todolistApp\todolistApp\settings.xml
+      run: Get-Content D:\a\todolistApp\todolistApp\settings.xml
     - name: get content of pom.xml file 
-        run: Get-Content D:\a\todolistApp\todolistApp\pom.xml
+      run: Get-Content D:\a\todolistApp\todolistApp\pom.xml
       
 
 
