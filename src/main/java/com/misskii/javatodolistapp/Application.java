@@ -12,6 +12,7 @@ public class Application extends javafx.application.Application {
         Parent root = FXMLLoader.load(getClass().getResource("login-page.fxml"));
         stage.setTitle("TO-DO List Application");
         stage.setScene(new Scene(root));
+        stage.setResizable(true);
         stage.show();
     }
     public static void main(String[] args) {

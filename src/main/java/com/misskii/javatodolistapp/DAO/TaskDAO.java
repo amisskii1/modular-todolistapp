@@ -6,8 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TaskDAO {
     private final Connection connection = DBUtil.getConnection();
@@ -69,5 +67,26 @@ public class TaskDAO {
             throwables.printStackTrace();
         }
         return observableList;
+    }
+
+    public Task getTaskByID(String id){
+        Task task = new Task();
+        try {
+            int taskId = Integer.parseInt(id);
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * FROM TASK WHERE taskid=?");
+            preparedStatement.setInt(1, taskId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                task.setTaskId(resultSet.getInt("taskid"));
+                task.setTaskTitle(resultSet.getString("tasktitle"));
+                task.setTaskDescription(resultSet.getString("taskdescription"));
+                task.setDueTo(resultSet.getString("dueto"));
+                task.setStatus(resultSet.getString("status"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return task;
     }
 }

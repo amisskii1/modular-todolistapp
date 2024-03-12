@@ -1,7 +1,6 @@
 package com.misskii.javatodolistapp.Updater;
 
 import java.io.*;
-import java.util.Objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,12 +11,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 public class Updater {
-    private static String ACTUAL_VERSION = "1.0.4";
+    private static String ACTUAL_VERSION = "1.0.3";
     private String gitToken = System.getenv("packages_token");
     private String latestVersion;
    public boolean compareVersions(){
        try {
-           System.out.println(gitToken);
            String apiUrl = "https://api.github.com/users/AntonMisskii/packages/maven/com.misskii.javatodolistapp/versions";
            HttpClient httpClient = HttpClients.createDefault();
            HttpGet httpGet = new HttpGet(apiUrl);
