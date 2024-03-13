@@ -1,7 +1,7 @@
-package com.misskii.todolistapp.controllers;
+package com.misskii.todolistapp.updater.controllers;
 
-import com.misskii.javatodolistapp.DAO.TaskDAO;
-import com.misskii.javatodolistapp.Models.Task;
+import com.misskii.javatodolistapp.dao.TaskDao;
+import com.misskii.javatodolistapp.entities.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -23,16 +23,16 @@ public class MainPageController extends GeneralController {
     private TableColumn<Task, String> tableDueTo;
     @FXML
     private TableColumn<Task, String> tableStatus;
-    TaskDAO taskDAO = new TaskDAO();
+    TaskDao taskDao = new TaskDao();
 
     public void fillTable(){
-        for (int i = 0; i < taskDAO.selectAllTasksByPersonId(this.userId).size(); i++){
+        for (int i = 0; i < taskDao.selectAllTasksByPersonId(this.userId).size(); i++){
             tableId.setCellValueFactory(new PropertyValueFactory<Task, Integer>("taskId"));
             tableTitle.setCellValueFactory(new PropertyValueFactory<Task, String>("taskTitle"));
             tableDescription.setCellValueFactory(new PropertyValueFactory<Task, String>("taskDescription"));
             tableDueTo.setCellValueFactory(new PropertyValueFactory<Task, String>("dueTo"));
             tableStatus.setCellValueFactory(new PropertyValueFactory<Task, String>("status"));
-            table.setItems(taskDAO.selectAllTasksByPersonId(this.userId));
+            table.setItems(taskDao.selectAllTasksByPersonId(this.userId));
         }
     }
 

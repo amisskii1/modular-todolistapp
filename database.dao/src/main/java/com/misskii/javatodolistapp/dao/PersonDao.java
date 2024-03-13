@@ -1,7 +1,7 @@
 package com.misskii.javatodolistapp.dao;
 
 import com.misskii.javatodolistapp.entities.Person;
-import com.misskii.todolistapp.util.DBUtil;
+import com.misskii.todolistapp.updater.util.DBUtil;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package com.misskii.todolistapp.controllers;
+package com.misskii.todolistapp.updater.controllers;
 
-import com.misskii.javatodolistapp.DAO.PersonDAO;
-import com.misskii.javatodolistapp.Models.Person;
+import com.misskii.javatodolistapp.dao.PersonDao;
+import com.misskii.javatodolistapp.entities.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -20,7 +20,7 @@ public class RegisterPageController extends GeneralController {
     private PasswordField userPasswordField;
     @FXML
     private PasswordField userPasswordField2;
-    private PersonDAO personDAO = new PersonDAO();
+    private PersonDao personDAO = new PersonDao();
 
     public void createNewUser(ActionEvent event) throws IOException {
         List<String> emailsList = new ArrayList<>();

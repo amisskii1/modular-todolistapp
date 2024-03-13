@@ -1,4 +1,4 @@
-package com.misskii.todolistapp.controllers;
+package com.misskii.todolistapp.updater.controllers;
 
 import com.misskii.javatodolistapp.dao.TaskDao;
 import com.misskii.javatodolistapp.entities.Task;

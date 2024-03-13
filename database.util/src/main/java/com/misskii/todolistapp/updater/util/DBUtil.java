@@ -1,4 +1,4 @@
-package com.misskii.todolistapp.util;
+package com.misskii.todolistapp.updater.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;

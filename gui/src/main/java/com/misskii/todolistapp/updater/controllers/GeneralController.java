@@ -1,7 +1,7 @@
-package com.misskii.todolistapp.controllers;
+package com.misskii.todolistapp.updater.controllers;
 
-import com.misskii.javatodolistapp.Controllers.MainPageController;
-import com.misskii.javatodolistapp.DAO.PersonDAO;
+
+import com.misskii.javatodolistapp.dao.PersonDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,11 +17,11 @@ public class GeneralController {
     private Parent root;
     private Scene scene;
     private Stage stage;
-    private PersonDAO personDAO = new PersonDAO();
+    private PersonDao personDao = new PersonDao();
     public int currentUser(int userId) {
         int currentUser = -1;
-        for (int i = 0; i < personDAO.loginUser().size(); i++){
-            if(personDAO.loginUser().get(i).getId() == userId){
+        for (int i = 0; i < personDao.loginUser().size(); i++){
+            if(personDao.loginUser().get(i).getId() == userId){
                 currentUser = i;
             }
         }
@@ -31,7 +31,7 @@ public class GeneralController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/misskii/javatodolistapp/main-page.fxml"));
         root = loader.load();
         MainPageController mainPageController = loader.getController();
-        mainPageController.displayUser(personDAO.loginUser().get(currentUser(getUserId())).getId());
+        mainPageController.displayUser(personDao.loginUser().get(currentUser(getUserId())).getId());
         mainPageController.fillTable();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -43,7 +43,7 @@ public class GeneralController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/misskii/javatodolistapp/main-page.fxml"));
         root = loader.load();
         MainPageController mainPageController = loader.getController();
-        mainPageController.displayUser(personDAO.loginUser().get(id).getId());
+        mainPageController.displayUser(personDao.loginUser().get(id).getId());
         mainPageController.fillTable();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

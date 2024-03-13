@@ -1,7 +1,8 @@
-package com.misskii.todolistapp.controllers;
+package com.misskii.todolistapp.updater.controllers;
 
-import com.misskii.javatodolistapp.DAO.PersonDAO;
-import com.misskii.javatodolistapp.Updater.Updater;
+
+import com.misskii.javatodolistapp.dao.PersonDao;
+import com.misskii.todolistapp.updater.Updater;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -18,7 +19,7 @@ public class LoginPageController extends GeneralController {
     @FXML
     private TextArea version;
 
-    PersonDAO personDAO = new PersonDAO();
+    PersonDao personDAO = new PersonDao();
 
     public void switchToApp(ActionEvent event) throws IOException {
         for (int i = 0; i < personDAO.loginUser().size(); i++) {
