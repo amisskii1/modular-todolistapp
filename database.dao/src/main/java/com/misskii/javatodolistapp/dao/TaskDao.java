@@ -68,4 +68,7 @@ public class TaskDao {
         }
         return observableList;
     }
+
+    public Task getTaskByID(String text) {
+    }
 }

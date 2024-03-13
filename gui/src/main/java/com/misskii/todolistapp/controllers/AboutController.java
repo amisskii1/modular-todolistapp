@@ -1,6 +1,6 @@
 package com.misskii.todolistapp.controllers;
 
-import com.misskii.javatodolistapp.Updater.Updater;
+import com.misskii.todolistapp.Updater;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
