@@ -4,7 +4,6 @@
     <artifactId>database.entity</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>algorithm.kincaid</name>
 
     <parent>
         <groupId>todolistapp</groupId>
