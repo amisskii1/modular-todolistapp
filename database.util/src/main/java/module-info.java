@@ -1,4 +1,5 @@
 module database.util {
-    requires java.sql;
+    requires transitive java.sql;
+
     exports com.misskii.todolistapp.updater.util;
 }

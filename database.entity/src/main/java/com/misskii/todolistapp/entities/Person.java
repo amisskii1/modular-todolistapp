@@ -1,4 +1,4 @@
-package com.misskii.javatodolistapp.entities;
+package com.misskii.todolistapp.entities;
 
 public class Person {
     private Integer id;

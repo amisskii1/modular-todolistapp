@@ -1,3 +1,3 @@
 module database.entity {
-    exports com.misskii.javatodolistapp.entities;
+    exports com.misskii.todolistapp.entities;
 }

@@ -1,7 +1,7 @@
-package com.misskii.todolistapp.updater.controllers;
+package com.misskii.todolistapp.gui.controllers;
 
-import com.misskii.javatodolistapp.dao.TaskDao;
-import com.misskii.javatodolistapp.entities.Task;
+import com.misskii.todolistapp.dao.TaskDao;
+import com.misskii.todolistapp.entities.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;

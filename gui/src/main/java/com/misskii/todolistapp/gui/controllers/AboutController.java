@@ -1,4 +1,4 @@
-package com.misskii.todolistapp.updater.controllers;
+package com.misskii.todolistapp.gui.controllers;
 
 import com.misskii.todolistapp.updater.Updater;
 import javafx.fxml.FXML;

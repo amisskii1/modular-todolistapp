@@ -1,6 +1,6 @@
-package com.misskii.javatodolistapp.dao;
+package com.misskii.todolistapp.dao;
 
-import com.misskii.javatodolistapp.entities.Task;
+import com.misskii.todolistapp.entities.Task;
 import com.misskii.todolistapp.updater.util.DBUtil;
 
 import javafx.collections.FXCollections;

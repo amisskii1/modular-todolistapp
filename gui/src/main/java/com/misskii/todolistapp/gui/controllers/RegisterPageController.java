@@ -1,7 +1,7 @@
-package com.misskii.todolistapp.updater.controllers;
+package com.misskii.todolistapp.gui.controllers;
 
-import com.misskii.javatodolistapp.dao.PersonDao;
-import com.misskii.javatodolistapp.entities.Person;
+import com.misskii.todolistapp.dao.PersonDao;
+import com.misskii.todolistapp.entities.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -40,10 +40,10 @@ public class RegisterPageController extends GeneralController {
             }
         }
         personDAO.createNewPerson(new Person(userName.getText(), userEmailField.getText(), userPasswordField.getText()));
-        changeScene(event, "login-page.fxml");
+        changeScene(event, "views/login-page.fxml");
     }
 
     public void switchToLoginPage(ActionEvent event) throws IOException {
-        changeScene(event, "login-page.fxml");
+        changeScene(event, "views/login-page.fxml");
     }
 }

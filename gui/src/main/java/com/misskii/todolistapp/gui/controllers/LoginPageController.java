@@ -1,7 +1,7 @@
-package com.misskii.todolistapp.updater.controllers;
+package com.misskii.todolistapp.gui.controllers;
 
 
-import com.misskii.javatodolistapp.dao.PersonDao;
+import com.misskii.todolistapp.dao.PersonDao;
 import com.misskii.todolistapp.updater.Updater;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,7 +33,7 @@ public class LoginPageController extends GeneralController {
     }
 
     public void switchToRegistration(ActionEvent event) throws IOException {
-        changeScene(event, "register-page.fxml");
+        changeScene(event, "views/register-page.fxml");
     }
 
     public void initialize(){

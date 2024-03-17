@@ -18,7 +18,7 @@ public class DBUtil {
     static{
         try {
             properties = new Properties();
-            properties.load(new FileInputStream("C:\\Users\\anton\\Desktop\\javatodolistapp\\src\\main\\resources\\database.properties"));
+            properties.load(new FileInputStream("C:\\Users\\anton\\Desktop\\javatodolistapp\\database.util\\src\\database.properties"));
             Class.forName(properties.getProperty(DB_DRIVER_CLASS));
             connection = DriverManager.getConnection(properties.getProperty(URL),properties.getProperty(USERNAME) , properties.getProperty(PASSWORD) );
         } catch (ClassNotFoundException | SQLException | IOException e) {
