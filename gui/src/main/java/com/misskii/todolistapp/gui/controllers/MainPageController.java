@@ -1,6 +1,6 @@
 package com.misskii.todolistapp.gui.controllers;
 
-import com.misskii.todolistapp.dao.TaskDao;
+import com.misskii.todolistapp.dao.api.TaskApi;
 import com.misskii.todolistapp.entities.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
+import java.util.ServiceLoader;
 
 public class MainPageController extends GeneralController {
     private int userId;
@@ -23,16 +24,19 @@ public class MainPageController extends GeneralController {
     private TableColumn<Task, String> tableDueTo;
     @FXML
     private TableColumn<Task, String> tableStatus;
-    TaskDao taskDao = new TaskDao();
+
+    TaskApi taskApi = ServiceLoader.load(TaskApi.class)
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("No implementation found"));
 
     public void fillTable(){
-        for (int i = 0; i < taskDao.selectAllTasksByPersonId(this.userId).size(); i++){
+        for (int i = 0; i < taskApi.selectAllTasksByPersonId(this.userId).size(); i++){
             tableId.setCellValueFactory(new PropertyValueFactory<Task, Integer>("taskId"));
             tableTitle.setCellValueFactory(new PropertyValueFactory<Task, String>("taskTitle"));
             tableDescription.setCellValueFactory(new PropertyValueFactory<Task, String>("taskDescription"));
             tableDueTo.setCellValueFactory(new PropertyValueFactory<Task, String>("dueTo"));
             tableStatus.setCellValueFactory(new PropertyValueFactory<Task, String>("status"));
-            table.setItems(taskDao.selectAllTasksByPersonId(this.userId));
+            table.setItems(taskApi.selectAllTasksByPersonId(this.userId));
         }
     }
 

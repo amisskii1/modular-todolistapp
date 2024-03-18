@@ -1,5 +1,6 @@
 package com.misskii.todolistapp.dao;
 
+import com.misskii.todolistapp.dao.api.TaskApi;
 import com.misskii.todolistapp.entities.Task;
 import com.misskii.todolistapp.updater.util.DBUtil;
 
@@ -7,7 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
 
-public class TaskDao {
+public class TaskDao implements TaskApi {
     private final Connection connection = DBUtil.getConnection();
 
     public void createNewTask(Task task){

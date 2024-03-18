@@ -1,5 +1,6 @@
 package com.misskii.todolistapp.dao;
 
+import com.misskii.todolistapp.dao.api.PersonApi;
 import com.misskii.todolistapp.entities.Person;
 import com.misskii.todolistapp.updater.util.DBUtil;
 
@@ -7,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonDao {
+public class PersonDao implements PersonApi {
     private final Connection connection = DBUtil.getConnection();
 
     public void createNewPerson(Person person){
@@ -27,7 +28,7 @@ public class PersonDao {
         }
     }
 
-    public List<Person> loginUser(){
+    public List<Person> getAllPeople(){
         List<Person> people = new ArrayList<>();
 
         try {

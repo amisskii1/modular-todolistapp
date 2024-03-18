@@ -1,7 +1,6 @@
 package com.misskii.todolistapp.gui.controllers;
 
-
-import com.misskii.todolistapp.dao.PersonDao;
+import com.misskii.todolistapp.dao.api.PersonApi;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,20 +8,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Objects;
+import java.util.ServiceLoader;
 
 public class GeneralController {
     private int userId;
     private Parent root;
     private Scene scene;
     private Stage stage;
-    private PersonDao personDao = new PersonDao();
+
+    PersonApi personApi = ServiceLoader.load(PersonApi.class)
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("No implementation found"));
+
     public int currentUser(int userId) {
         int currentUser = -1;
-        for (int i = 0; i < personDao.loginUser().size(); i++){
-            if(personDao.loginUser().get(i).getId() == userId){
+        for (int i = 0; i < personApi.getAllPeople().size(); i++){
+            if(personApi.getAllPeople().get(i).getId() == userId){
                 currentUser = i;
             }
         }
@@ -32,7 +35,7 @@ public class GeneralController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main-page.fxml"));
         root = loader.load();
         MainPageController mainPageController = loader.getController();
-        mainPageController.displayUser(personDao.loginUser().get(currentUser(getUserId())).getId());
+        mainPageController.displayUser(personApi.getAllPeople().get(currentUser(getUserId())).getId());
         mainPageController.fillTable();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -44,7 +47,7 @@ public class GeneralController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main-page.fxml"));
         root = loader.load();
         MainPageController mainPageController = loader.getController();
-        mainPageController.displayUser(personDao.loginUser().get(id).getId());
+        mainPageController.displayUser(personApi.getAllPeople().get(id).getId());
         mainPageController.fillTable();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
