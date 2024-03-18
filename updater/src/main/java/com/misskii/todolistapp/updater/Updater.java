@@ -1,17 +1,17 @@
 package com.misskii.todolistapp.updater;
 
 import java.io.*;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.misskii.todolistapp.updater.api.UpdaterApi;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-public class Updater {
-    private static final String ACTUAL_VERSION = "1.0.3";
+public class Updater implements UpdaterApi {
+    private static final String ACTUAL_VERSION = "1.0.4";
     private final String gitToken = System.getenv("packages_token");
     private String latestVersion;
    public boolean compareVersions(){

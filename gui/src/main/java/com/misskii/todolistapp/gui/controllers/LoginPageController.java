@@ -1,7 +1,7 @@
 package com.misskii.todolistapp.gui.controllers;
 
 import com.misskii.todolistapp.dao.api.PersonApi;
-import com.misskii.todolistapp.updater.Updater;
+import com.misskii.todolistapp.updater.api.UpdaterApi;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -23,6 +23,10 @@ public class LoginPageController extends GeneralController {
             .findFirst()
             .orElseThrow(() -> new RuntimeException("No implementation found"));
 
+    UpdaterApi updaterApi = ServiceLoader.load(UpdaterApi.class)
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("No implementation found"));
+
     public void switchToApp(ActionEvent event) throws IOException {
         for (int i = 0; i < personApi.getAllPeople().size(); i++) {
             if (Objects.equals(personApi.getAllPeople().get(i).getEmail(), userEmail.getText())
@@ -39,8 +43,7 @@ public class LoginPageController extends GeneralController {
     }
 
     public void initialize(){
-        Updater updater = new Updater();
-        if ( !updater.compareVersions() ){
+        if ( !updaterApi.compareVersions() ){
             version.setStyle("-fx-text-fill: red;");
             version.setText("It appears you might not be using the most up-to-date version." +
                     " \nYou can download the latest version from the following link:" +
