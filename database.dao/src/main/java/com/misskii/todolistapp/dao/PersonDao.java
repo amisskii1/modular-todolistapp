@@ -1,8 +1,9 @@
 package com.misskii.todolistapp.dao;
 
 import com.misskii.todolistapp.dao.api.PersonApi;
+import com.misskii.todolistapp.dao.exceptions.PersonNotExistsException;
 import com.misskii.todolistapp.entities.Person;
-import com.misskii.todolistapp.updater.util.DBUtil;
+import com.misskii.todolistapp.utils.DBUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,10 +12,23 @@ import java.util.List;
 public class PersonDao implements PersonApi {
     private final Connection connection = DBUtil.getConnection();
 
+    public int getPersonIdByEmail(String email) throws SQLException, PersonNotExistsException {
+        int id = 0;
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT user_id FROM users WHERE user_email=?");
+        preparedStatement.setString(1, email);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()){
+            id = resultSet.getInt("user_id");
+        }else {
+            throw new PersonNotExistsException();
+        }
+        return id;
+    }
+
     public void createNewPerson(Person person){
         try {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO PERSON (personName, personEmail, personPassword) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("INSERT INTO users (user_name, user_email, user_password) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, person.getName());
             preparedStatement.setString(2, person.getEmail());
             preparedStatement.setString(3, person.getPassword());
@@ -33,14 +47,14 @@ public class PersonDao implements PersonApi {
 
         try {
             Statement statement = connection.createStatement();
-            String SQL = "SELECT * FROM Person";
+            String SQL = "SELECT * FROM users";
             ResultSet resultSet = statement.executeQuery(SQL);
             while(resultSet.next()){
                 Person person = new Person();
-                person.setId(resultSet.getInt("personId"));
-                person.setName(resultSet.getString("personName"));
-                person.setEmail(resultSet.getString("personEmail"));
-                person.setPassword(resultSet.getString("personPassword"));
+                person.setId(resultSet.getInt("user_id"));
+                person.setName(resultSet.getString("user_name"));
+                person.setEmail(resultSet.getString("user_email"));
+                person.setPassword(resultSet.getString("user_password"));
                 people.add(person);
             }
         } catch (SQLException throwables) {
