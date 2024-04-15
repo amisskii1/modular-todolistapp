@@ -7,12 +7,12 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>EasyText parent</name>
+    <name>todoapp parent</name>
 
     <modules>
         <module>database.dao</module>
         <module>database.entity</module>
-        <module>database.util</module>
+        <module>utils</module>
         <module>gui</module>
         <module>updater</module>
         <module>license</module>
