@@ -10,7 +10,6 @@ import java.util.Objects;
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        System.out.println(getClass().getResource("/views/login-page.fxml"));
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/login-page.fxml")));
         stage.setTitle("TO-DO List Application");
         stage.setScene(new Scene(root));

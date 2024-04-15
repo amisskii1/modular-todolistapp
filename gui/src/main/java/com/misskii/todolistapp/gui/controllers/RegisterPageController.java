@@ -39,10 +39,10 @@ public class RegisterPageController extends GeneralController {
             }
         }
         personApi.createNewPerson(new Person(userName.getText(), userEmailField.getText(), userPasswordField.getText()));
-        changeScene(event, "views/login-page.fxml");
+        changeScene(event, "login-page.fxml");
     }
 
     public void switchToLoginPage(ActionEvent event) throws IOException {
-        changeScene(event, "views/login-page.fxml");
+        changeScene(event, "login-page.fxml");
     }
 }

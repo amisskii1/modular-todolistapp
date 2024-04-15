@@ -5,11 +5,19 @@ import com.misskii.todolistapp.entities.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Objects;
 import java.util.ServiceLoader;
 
 public class EditPageController extends GeneralController {
+    private String licenseStatus;
+    @FXML
+    public ToggleGroup priority;
     @FXML
     private TextField taskID;
     @FXML
@@ -20,6 +28,14 @@ public class EditPageController extends GeneralController {
     private TextField taskExp;
     @FXML
     private CheckBox markDone;
+    @FXML
+    private RadioButton priority1;
+    @FXML
+    private RadioButton priority2;
+    @FXML
+    private RadioButton priority3;
+    @FXML
+    private RadioButton priorityDefault;
 
     private Task task;
 
@@ -30,49 +46,51 @@ public class EditPageController extends GeneralController {
     public void confChangeTask(ActionEvent event) throws IOException {
         if(taskID.getText().isEmpty()){
             displayError("Id field should be filled");
+            return;
+        }
+        if (!taskExp.getText().isEmpty() && !isValidDate(taskExp.getText())){
+            displayError("Date field must be in format yyyy-MM-dd");
+            return;
         }
         task = taskApi.getTaskByID(taskID.getText());
-        String status = "In Progress";
-        if (markDone.isSelected()){
-            status = "Done";
+        if (task == null) {
+            displayError("Task with ID " + taskID.getText() + " not found");
+            return;
         }
-        if (taskDesk.getText().isEmpty()){
-            taskApi.updateTaskByID(currentUser(getUserId())+1 ,taskID.getText(), task.getTaskDescription(),
-                    taskTitle.getText(), taskExp.getText(), status);
+        String status = markDone.isSelected() ? "Done" : "In Progress";
+        String description = taskDesk.getText().isEmpty() ? task.getTaskDescription() : taskDesk.getText();
+        String title = taskTitle.getText().isEmpty() ? task.getTaskTitle() : taskTitle.getText();
+        Date expirationDate = taskExp.getText().isEmpty() ? task.getDate() : Date.valueOf(taskExp.getText());
+        taskApi.updateTaskByID(currentUser(getUserId()) + 1, taskID.getText(), description, title, expirationDate, status, setPriority());
+        switchToMainPage(event, licenseStatus);
+    }
+
+
+    public String setPriority(){
+        if (priority1.isSelected()){
+            return "priority1";
+        } else if (priority2.isSelected()) {
+            return "priority2";
+        } else if (priority3.isSelected()) {
+            return "priority3";
         }
-        if (taskTitle.getText().isEmpty()){
-            taskApi.updateTaskByID(currentUser(getUserId())+1 ,taskID.getText(), task.getTaskDescription(),
-                    task.getTaskTitle(), taskExp.getText(), status);
-        }
-        if (taskExp.getText().isEmpty()){
-            taskApi.updateTaskByID(currentUser(getUserId())+1 ,taskID.getText(), task.getTaskDescription(),
-                    taskTitle.getText(), task.getDueTo(), status);
-        }
-        if (taskDesk.getText().isEmpty() && taskTitle.getText().isEmpty()){
-            taskApi.updateTaskByID(currentUser(getUserId())+1 ,taskID.getText(), task.getTaskDescription(),
-                    task.getTaskTitle(), taskExp.getText(), status);
-        }
-        if (taskDesk.getText().isEmpty() && taskExp.getText().isEmpty()){
-            taskApi.updateTaskByID(currentUser(getUserId())+1 ,taskID.getText(), task.getTaskDescription(),
-                    taskTitle.getText(), task.getDueTo(), status);
-        }
-        if (taskTitle.getText().isEmpty() && taskExp.getText().isEmpty()){
-            taskApi.updateTaskByID(currentUser(getUserId())+1 ,taskID.getText(), taskDesk.getText(),
-                    task.getTaskTitle(), task.getDueTo(), status);
-        }
-        if (taskExp.getText().isEmpty() && taskTitle.getText().isEmpty()
-                && taskDesk.getText().isEmpty()) {
-            taskApi.updateTaskByID(currentUser(getUserId())+1 ,taskID.getText(), task.getTaskDescription(),
-                    task.getTaskTitle(), task.getDueTo(), status);
-        }
-        if (!taskDesk.getText().isEmpty() && !taskTitle.getText().isEmpty() && !taskExp.getText().isEmpty()){
-            taskApi.updateTaskByID(currentUser(getUserId())+1 ,taskID.getText(), taskDesk.getText(),
-                    taskTitle.getText(), taskExp.getText(), status);
-        }
-        switchToMainPage(event);
+        return "default";
     }
 
     public void cancel(ActionEvent event) throws IOException {
-        switchToMainPage(event);
+        switchToMainPage(event, licenseStatus);
+    }
+
+    public void setLicenseStatus(String licenseStatus) {
+        this.licenseStatus = licenseStatus;
+    }
+
+    public void checkLicense(String status) {
+        priorityDefault.setSelected(true);
+        if (!Objects.equals(status, "valid")){
+            priority1.setDisable(true);
+            priority2.setDisable(true);
+            priority3.setDisable(true);
+        }
     }
 }
