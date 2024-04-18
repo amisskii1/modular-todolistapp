@@ -10,32 +10,17 @@
     <name>todoapp parent</name>
 
     <modules>
-        <module>database.dao</module>
-        <module>database.entity</module>
-        <module>utils</module>
-        <module>gui</module>
-        <module>updater</module>
-        <module>license</module>
+        <module>todolist.dao</module>
+        <module>todolist.gui</module>
+        <module>todolist.utils</module>
+        <module>todolist.license</module>
+        <module>todolist.updater</module>
+        <module>todolist.models</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>easytext</groupId>
-                <artifactId>algorithm.api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>easytext</groupId>
-                <artifactId>algorithm.coleman</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <pluginManagement>

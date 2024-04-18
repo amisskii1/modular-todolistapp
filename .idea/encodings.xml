@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/database.dao/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/database.dao/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/database.entity/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/database.entity/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/gui/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/gui/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/license/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/license/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/updater/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/updater/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utils/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utils/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.dao/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.dao/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.gui/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.gui/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.license/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.license/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.models/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.models/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.updater/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.updater/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/todolist.utils/src/main/resources" charset="UTF-8" />
   </component>
 </project>
