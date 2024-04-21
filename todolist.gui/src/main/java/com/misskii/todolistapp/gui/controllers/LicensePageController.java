@@ -47,25 +47,37 @@ public class LicensePageController extends GeneralController {
         changeScene(event, "login-page.fxml");
     }
 
-    public void getTrialLicense(ActionEvent event) throws IOException {
+    public void getTrialLicense(ActionEvent event) {
         if (!isEmailFormatValid(email.getText())) {
             displayError("Email is not valid");
             return;
         }
-        String licenseTrialResult = licenseClientApi.createTrialLicense(email.getText());
-        if (Objects.equals(licenseTrialResult, "Trial license can not be activated")){
-            displayError("Trial license can not be activated");
-            return;
-        }
+
         try {
-            licenseApi.save(email.getText(),licenseTrialResult);
-        } catch (SQLException e) {
-            displayError("Trial license can not be activated");
-        } catch (PersonNotExistsException e){
-            displayError("User with this email does not exist");
-            return;
+            String licenseTrialResult = null;
+            try {
+                licenseTrialResult = licenseClientApi.createTrialLicense(email.getText());
+            } catch (RuntimeException e) {
+                displayError(e.getMessage());
+                return;
+            }
+
+            if (Objects.equals(licenseTrialResult, "Trial license can not be activated")) {
+                displayError("Trial license can not be activated");
+                return;
+            }
+
+            try {
+                licenseApi.save(email.getText(), licenseTrialResult);
+                changeScene(event, "login-page.fxml");
+            } catch (SQLException e) {
+                displayError("Trial license can not be activated");
+            } catch (PersonNotExistsException e) {
+                displayError("User with this email does not exist");
+            }
+        } catch (IOException e) {
+            displayError("Server is not accessible");
         }
-        changeScene(event, "login-page.fxml");
     }
 
     public boolean isLicenseValueValid(){

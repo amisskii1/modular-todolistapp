@@ -2,10 +2,8 @@ package com.misskii.todolistapp.gui.controllers;
 
 import com.misskii.todolistapp.dao.api.LicenseApi;
 import com.misskii.todolistapp.dao.api.PersonApi;
-import com.misskii.todolistapp.dao.api.TaskApi;
 import com.misskii.todolistapp.license.api.LicenseClientApi;
 import com.misskii.todolistapp.updater.api.UpdaterApi;
-import org.springframework.web.client.ResourceAccessException; //transitive dependency
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,7 +52,7 @@ public class LoginPageController extends GeneralController {
                 try {
                     List<String> licenseData = licenseClientApi.validateLicenseKey(userEmail.getText(), licenseApi.getLicenseValueByUserID(i+1));
                     licenseApi.updateLicenseStatus(licenseData.get(0), LocalDateTime.parse(licenseData.get(1)),i+1);
-                }catch (ResourceAccessException e){
+                }catch (Exception e){
                     if (!LocalDateTime.now().isBefore(licenseApi.getExpireDate(i+1))){
                         licenseApi.updateLicenseStatus("invalid", i+1);
                     }
