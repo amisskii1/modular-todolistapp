@@ -16,7 +16,7 @@ jobs:
     - name: Install JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '21' # or any version you prefer
+        java-version: '22' # or any version you prefer
         
     - name: check directory
       run: ls 
