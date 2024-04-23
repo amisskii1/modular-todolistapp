@@ -3,7 +3,7 @@ name: Build and Release Custom JRE
 on:
   push:
     branches:
-      - main
+      - moduleApplication1
 
 jobs:
   build:
